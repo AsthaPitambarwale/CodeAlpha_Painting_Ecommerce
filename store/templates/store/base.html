@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        {% if user.is_authenticated %}
+            <a href="/logout/">Logout</a>
+            <a href="/cart/">Cart</a>
+        {% else %}
+            <a href="/login/">Login</a>
+            <a href="/register/">Register</a>
+        {% endif %}
+        <button id="theme-toggle" class="btn" style="margin-left:auto;">🌓 Theme</button>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+
+<script>
+  const toggleBtn = document.getElementById('theme-toggle');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  document.body.className = currentTheme;
+
+  toggleBtn.addEventListener('click', () => {
+    const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+    document.body.className = newTheme;
+    localStorage.setItem('theme', newTheme);
+  });
+</script>
+</html>

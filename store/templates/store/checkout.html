@@ -1,0 +1,16 @@
+{% extends 'store/base.html' %}
+{% block content %}
+  <h2>Checkout</h2>
+  <div class="box">
+    <ul>
+      {% for item in cart_items %}
+        <li>{{ item.product.name }} - Quantity: {{ item.quantity }} - ₹{{ item.total }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <p>
+    <strong>Total Price:</strong> ₹{{ total_price }}
+  </p>
+  <a href="{% url 'payment' %}" class="btn">Proceed to Pay</a>
+{% endblock %}
